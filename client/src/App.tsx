@@ -7,7 +7,7 @@ import Tasks from "./pages/Tasks";
 const App: React.FC = () => {
   return (
     <Router>
-      <div>
+      <div className="w-full max-w-[1720px] flex flex-col gap-[20px]">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

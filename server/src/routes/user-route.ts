@@ -9,6 +9,8 @@ interface Route {
 
 const endpoints: Route[] = [
   { method: "get", path: "published", func: usersController.findAll },
+  { method: "post", path: "login", func: usersController.login },
+  { method: "post", path: "register", func: usersController.register },
 ];
 
 export default endpoints;

@@ -12,7 +12,7 @@ const app: Application = express();
 
 // CORS
 const corsOptions = {
-  origin: ['http://localhost:5072'],
+  origin: ['http://localhost:3000'],
 };
 app.use(cors(corsOptions));
 

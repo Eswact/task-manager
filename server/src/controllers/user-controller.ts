@@ -16,10 +16,10 @@ const findAll = async (req: Request, res: Response): Promise<void> => {
 };
 
 const login = async (req: Request, res: Response): Promise<void> => {
-  const { username, password } = req.body;
+  const { mail, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ mail });
     if (!user) {
       res.status(400).json({ message: "Invalid username or password" });
       return;

@@ -23,7 +23,7 @@ const chooseMethod = (method: string, path: string, func: RequestHandler): void 
 };
 
 userRoutes.forEach(({ method, path, func }) => {
-  chooseMethod(method, `/users/${path}`, func);
+  chooseMethod(method, `/user/${path}`, func);
 });
 
 export default router;

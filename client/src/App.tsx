@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Tasks from "./pages/Tasks";
 import Login from "./pages/Login";
+import { isAuthenticated } from "./services/authService";
 
 const App: React.FC = () => {
   return (
@@ -13,17 +14,21 @@ const App: React.FC = () => {
   );
 };
 
+const ProtectedRoute = ({ element }: { element: React.ReactElement }) => {
+  return isAuthenticated() ? element : <Navigate to="/login" />;
+};
+
 const MainRoutes: React.FC = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
   return (
     <div className={`w-full flex flex-col gap-[20px] ${!isLoginPage ? 'max-w-[1720px] p-[20px]' : ''}`}>
-      {(!isLoginPage) ? <Navbar/>: null}
+      {!isLoginPage && <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
+        <Route path="/tasks" element={<ProtectedRoute element={<Tasks />} />} />
       </Routes>
     </div>
   );

@@ -1,15 +1,30 @@
 import React from "react";
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import AjaxScripts from "../scripts/ajaxScript";
 
 const Login: React.FC = () => {
+    const navigate = useNavigate();
     const login = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
           const mail = (document.getElementById("email") as HTMLInputElement).value;
           const password = (document.getElementById("password") as HTMLInputElement).value;
-    
-          const response = await axios.post('http://localhost:3001/api/users/login', { mail, password });
-          console.log(response.data);
+          const rememberMe = (document.getElementById("remember_me") as HTMLInputElement).checked;
+          AjaxScripts.Login({ 
+            data: { mail, password }, 
+            onSuccess: (res: any) => {
+                let token:string = JSON.stringify(res.token);
+                if (rememberMe) {
+                    localStorage.setItem('token', token);
+                } else {
+                    sessionStorage.setItem('token', token);
+                }
+                navigate('/');
+            },
+            onError: (err: any) => {
+                console.error('Login failed:', err.response ? err.response.data : err.message);
+            } 
+          });
         } catch (error: any) {
           console.error('Login failed:', error.response ? error.response.data : error.message);
         }
@@ -35,6 +50,7 @@ const Login: React.FC = () => {
                                         id="email"
                                         name="email"
                                         type="email"
+                                        autoComplete="current-email"
                                         required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
@@ -46,11 +62,12 @@ const Login: React.FC = () => {
                                     </label>
                                     <div className="mt-1 rounded-md shadow-sm">
                                         <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            autoComplete="current-password"
+                                            required
+                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>

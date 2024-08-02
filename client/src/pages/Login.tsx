@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import AjaxScripts from "../scripts/ajaxScript";
+import { ShowError, ShowSuccess } from "../scripts/common";
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -20,13 +21,14 @@ const Login: React.FC = () => {
                     sessionStorage.setItem('token', token);
                 }
                 navigate('/');
+                ShowSuccess('Welcome back!');
             },
             onError: (err: any) => {
-                console.error('Login failed:', err.response ? err.response.data : err.message);
-            } 
-          });
+                ShowError(err.response?.data.message || err.message);
+            }
+        });
         } catch (error: any) {
-          console.error('Login failed:', error.response ? error.response.data : error.message);
+            ShowError(error.message || null);
         }
     };
     return (

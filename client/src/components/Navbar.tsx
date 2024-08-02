@@ -1,9 +1,14 @@
 import React from "react";
-import { Link, useLocation, Location } from "react-router-dom";
+import { Link, useLocation, Location, useNavigate } from "react-router-dom";
+import { logout } from "../services/authService";
 
 const Navbar: React.FC = () => {
   const location: Location = useLocation();
-
+  const navigate = useNavigate();
+  const exit = () => {
+      logout();
+      navigate('/login');
+  };
   return (
     <nav className="w-full border-b-[1px] border-main-shadow py-[6px] px-[12px] flex items-center justify-between">
       <div className="flex items-center gap-[100px]">
@@ -18,7 +23,7 @@ const Navbar: React.FC = () => {
         </ul>
       </div>
       <div>
-        <button className="bg-second shadow-md shadow-second-shadow text-white font-bold px-[12px] py-[6px] rounded-md">Test</button>
+        <button onClick={exit} className="bg-second shadow-md shadow-second-shadow text-white font-bold px-[12px] py-[6px] rounded-md">Logout</button>
       </div>
     </nav>
   );

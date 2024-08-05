@@ -1,0 +1,14 @@
+.loginTabs {
+    display: none;
+    min-width: 325px;
+}
+.loginTabs.open {
+    display: block;
+}
+input[type="password"]::placeholder {
+    font-size: 32px;
+    line-height: 32px;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 7px 0;
+}

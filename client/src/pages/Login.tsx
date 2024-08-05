@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import AjaxScripts from "../scripts/ajaxScript";
 import { ShowError, ShowSuccess } from "../scripts/common";
+import '../styles/pages/login.css';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -31,10 +32,44 @@ const Login: React.FC = () => {
             ShowError(error.message || null);
         }
     };
+    const register = async (event: React.FormEvent) => { 
+        event.preventDefault();
+        try {
+            const mail = (document.getElementById("emailR") as HTMLInputElement).value;
+            const username = (document.getElementById("usernameR") as HTMLInputElement).value;
+            const password = (document.getElementById("passwordR") as HTMLInputElement).value;
+            const password2 = (document.getElementById("passwordR2") as HTMLInputElement).value;
+            const role = 0;
+            if (password !== password2) {
+                ShowError('Passwords do not match');
+                return;
+            }
+            AjaxScripts.Register({ 
+                data: { username, password, role, mail }, 
+                onSuccess: (res: any) => {
+                    ShowSuccess('You can log in using the confirmation email sent to your email.');
+                    switchTab();
+                },
+                onError: (err: any) => {
+                    ShowError(err.response?.data.message || err.message);
+                }
+            });
+        } catch (error: any) {
+            ShowError(error.message || null);
+        }
+    };
+    const switchTab = () => {
+        const loginTabs = document.getElementsByClassName('loginTabs');
+        for (let i = 0; i < loginTabs.length; i++) {
+            let element = loginTabs[i];
+            element.classList.toggle('open');
+        }
+    };
     return (
         <div className="min-h-screen bg-white flex">
             <div className="flex-none md:flex-1 flex flex-col justify-center py-12 px-28 lg:px-18 md:px-12 sm:px-8">
-                <div className="mx-auto w-full max-w-sm">
+                {/* Login */}
+                <div className="loginTabs open mx-auto w-full max-w-sm">
                     <div>
                         <h2 className="mt-6 text-3xl leading-9 font-extrabold text-main">
                         Login to your account
@@ -53,6 +88,7 @@ const Login: React.FC = () => {
                                         name="email"
                                         type="email"
                                         autoComplete="current-email"
+                                        placeholder="example@mail.com"
                                         required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
@@ -68,6 +104,7 @@ const Login: React.FC = () => {
                                             name="password"
                                             type="password"
                                             autoComplete="current-password"
+                                            placeholder="············"
                                             required
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
@@ -95,10 +132,121 @@ const Login: React.FC = () => {
                                     <span className="block w-full rounded-md shadow-sm">
                                         <button
                                         type="submit"
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-main hover:bg-third focus:outline-none focus:border-main focus:shadow-outline-indigo active:bg-main transition duration-150 ease-in-out"
+                                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-main hover:bg-third focus:bg-third focus:outline-none focus:border-third focus:shadow-outline-indigo active:bg-third transition duration-150 ease-in-out"
                                         >
                                         Login
                                         </button>
+                                        
+                                    </span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="block w-full rounded-md shadow-sm">
+                                    <button
+                                    type="button"
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-main hover:text-third hover:border-third focus:outline-none border-main focus:border-third focus:text-third focus:shadow-outline-indigo active:text-third transition duration-150 ease-in-out"
+                                    onClick={switchTab}
+                                    >
+                                    Switch to register
+                                    </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {/* Register */}
+                <div className="loginTabs mx-auto w-full max-w-sm">
+                    <div>
+                        <h2 className="mt-6 text-3xl leading-9 font-extrabold text-main">
+                        Register to TaskMG
+                        </h2>
+                    </div>
+                    <div className="mt-8">
+                        <div className="mt-6">
+                            <form onSubmit={register} method="POST">
+                                <div>
+                                    <label htmlFor="emailR" className="block text-sm font-medium leading-5 text-gray-700">
+                                        Email address
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                        <input
+                                        id="emailR"
+                                        name="emailR"
+                                        type="email"
+                                        autoComplete="off"
+                                        placeholder="example@mail.com"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <label htmlFor="usernameR" className="block text-sm font-medium leading-5 text-gray-700">
+                                        Username
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                        <input
+                                        id="usernameR"
+                                        name="usernameR"
+                                        type="text"
+                                        autoComplete="off"
+                                        placeholder="username"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <label htmlFor="passwordR" className="block text-sm font-medium leading-5 text-gray-700">
+                                        Password
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                        <input
+                                            id="passwordR"
+                                            name="passwordR"
+                                            type="password"
+                                            autoComplete="new-password"
+                                            placeholder="············"
+                                            required
+                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-4">
+                                    <label htmlFor="passwordR2" className="block text-sm font-medium leading-5 text-gray-700">
+                                        Password Verify
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                        <input
+                                            id="passwordR2"
+                                            name="passwordR2"
+                                            type="password"
+                                            autoComplete="new-password"
+                                            placeholder="············"
+                                            required
+                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-6">
+                                    <span className="block w-full rounded-md shadow-sm">
+                                        <button
+                                        type="submit"
+                                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-main hover:bg-third focus:outline-none focus:border-third focus:bg-third focus:shadow-outline-indigo active:bg-main transition duration-150 ease-in-out"
+                                        >
+                                        Register
+                                        </button>
+                                    </span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="block w-full rounded-md shadow-sm">
+                                    <button
+                                    type="button"
+                                    onClick={switchTab}
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-main hover:text-third hover:border-third focus:border-third focus:text-third focus:outline-none border-main focus:shadow-outline-indigo active:text-main transition duration-150 ease-in-out"
+                                    >
+                                    Switch to login
+                                    </button>
                                     </span>
                                 </div>
                             </form>

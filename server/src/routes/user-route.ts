@@ -11,6 +11,7 @@ const endpoints: Route[] = [
   { method: "get", path: "published", func: usersController.findAll },
   { method: "post", path: "login", func: usersController.login },
   { method: "post", path: "register", func: usersController.register },
+  { method: "post", path: "verify-email", func: usersController.verifyEmail },
 ];
 
 export default endpoints;

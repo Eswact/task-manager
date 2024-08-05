@@ -1,3 +1,4 @@
+import { Verify } from 'crypto';
 import { fetchData, postData } from '../services/ajaxService';
 
 const AjaxScripts = {
@@ -10,6 +11,9 @@ const AjaxScripts = {
   Login: function ({ data, onSuccess, onError }: { data: any, onSuccess: (res: any) => any, onError: (err: any) => any }) {
     postData("user/login", data, onSuccess, onError);
   },
+  VerifyEmail: function ({ data, onSuccess, onError }: { data: any, onSuccess: (res: any) => any, onError: (err: any) => any }) {
+    postData("user/verify-email", data, onSuccess, onError);
+  }
 };
 
 export default AjaxScripts;

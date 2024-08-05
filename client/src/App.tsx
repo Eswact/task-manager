@@ -29,6 +29,7 @@ const MainRoutes: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/tasks" element={<ProtectedRoute element={<Tasks />} />} />
+        <Route path="*" element={<Login />} />
       </Routes>
     </div>
   );

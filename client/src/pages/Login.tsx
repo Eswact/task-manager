@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import AjaxScripts from "../scripts/ajaxScript";
 import { ShowError, ShowSuccess } from "../scripts/common";
 import '../styles/pages/login.css';
 
 const Login: React.FC = () => {
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('verify');
+        if (token) {
+            window.history.replaceState(null, '', window.location.pathname);
+            AjaxScripts.VerifyEmail({ 
+                data: { token: token }, 
+                onSuccess: (res: any) => {
+                    ShowSuccess('Your e-mail has been confirmed successfully.');
+                },
+                onError: (err: any) => {
+                    ShowError(err.response?.data.message || err.message);
+                }
+            });
+        }
+    }, []);
+
     const navigate = useNavigate();
     const login = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -26,8 +43,9 @@ const Login: React.FC = () => {
             },
             onError: (err: any) => {
                 ShowError(err.response?.data.message || err.message);
+                document.querySelectorAll('input').forEach((input) => { (input as HTMLInputElement).value = ''; });
             }
-        });
+          });
         } catch (error: any) {
             ShowError(error.message || null);
         }
@@ -42,12 +60,14 @@ const Login: React.FC = () => {
             const role = 0;
             if (password !== password2) {
                 ShowError('Passwords do not match');
+                document.querySelectorAll('input[type="password"]').forEach((input) => { (input as HTMLInputElement).value = ''; });
                 return;
             }
             AjaxScripts.Register({ 
                 data: { username, password, role, mail }, 
                 onSuccess: (res: any) => {
                     ShowSuccess('You can log in using the confirmation email sent to your email.');
+                    document.querySelectorAll('input').forEach((input) => { (input as HTMLInputElement).value = ''; });
                     switchTab();
                 },
                 onError: (err: any) => {
@@ -65,8 +85,10 @@ const Login: React.FC = () => {
             element.classList.toggle('open');
         }
     };
+
     return (
         <div className="min-h-screen bg-white flex">
+            {/* Forms */}
             <div className="flex-none md:flex-1 flex flex-col justify-center py-12 px-28 lg:px-18 md:px-12 sm:px-8">
                 {/* Login */}
                 <div className="loginTabs open mx-auto w-full max-w-sm">
@@ -143,7 +165,7 @@ const Login: React.FC = () => {
                                     <span className="block w-full rounded-md shadow-sm">
                                     <button
                                     type="button"
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-main hover:text-third hover:border-third focus:outline-none border-main focus:border-third focus:text-third focus:shadow-outline-indigo active:text-third transition duration-150 ease-in-out"
+                                    className="w-full flex justify-center py-2 px-4 border border-main text-sm text-main font-medium rounded-md hover:text-third hover:border-third focus:outline-none  focus:border-third focus:text-third focus:shadow-outline-indigo active:text-third transition duration-150 ease-in-out"
                                     onClick={switchTab}
                                     >
                                     Switch to register
@@ -243,7 +265,7 @@ const Login: React.FC = () => {
                                     <button
                                     type="button"
                                     onClick={switchTab}
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-main hover:text-third hover:border-third focus:border-third focus:text-third focus:outline-none border-main focus:shadow-outline-indigo active:text-main transition duration-150 ease-in-out"
+                                    className="w-full flex justify-center py-2 px-4 border border-main text-sm text-main font-medium rounded-md hover:text-third hover:border-third focus:border-third focus:text-third focus:outline-none focus:shadow-outline-indigo active:text-main transition duration-150 ease-in-out"
                                     >
                                     Switch to login
                                     </button>
@@ -254,6 +276,7 @@ const Login: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {/* Image */}
             <div className="md:hidden block relative w-0 flex-1">
                 <img
                 className="absolute inset-0 h-full w-full object-cover"

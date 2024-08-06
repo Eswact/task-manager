@@ -19,3 +19,28 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* dark mode */
+body.dark {
+    background-color: #092635;
+}
+
+.theme-controller {
+    display: none;
+}
+
+.swap-off {
+    display: block;
+}
+
+.swap-on {
+    display: none;
+}
+
+.theme-controller:checked ~ .swap-on {
+    display: block;
+}
+
+.theme-controller:checked ~ .swap-off {
+    display: none;
+}

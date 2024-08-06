@@ -58,13 +58,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET!);
     const verificationUrl = `${process.env.CONFIRM_URL}?verify=${token}`;
-    const context = `
-      <h1>Email Confirmation</h1>
-      <p>Hi ${newUser.username},</p>
-      <p>Please click the link below to confirm your email address:</p>
-      <a href="${verificationUrl}">Confirm Email</a>
-    `;
-    await sendVerificationMail(newUser, context);
+    await sendVerificationMail(newUser, verificationUrl);
 
     res.status(201).json({ message: "User created successfully" });
   } catch (err: any) {
@@ -74,7 +68,6 @@ const register = async (req: Request, res: Response): Promise<void> => {
 
 const verifyEmail = async (req: Request, res: Response): Promise<void> => {
   const token = req.body.token as string;
-  console.log(token);
 
   if (!token) {
     res.status(400).json({ message: "Invalid token" });

@@ -1,11 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AjaxScripts from "../scripts/ajaxScript";
 import { ShowError, ShowSuccess } from "../scripts/common";
 import '../styles/pages/login.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Login: React.FC = () => {
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
     useEffect(() => {
+        //verify email
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('verify');
         if (token) {
@@ -94,7 +102,7 @@ const Login: React.FC = () => {
                 <div className="loginTabs open mx-auto w-full max-w-sm">
                     <div>
                         <h2 className="mt-6 text-3xl leading-9 font-extrabold text-main">
-                        Login to your account
+                            Login to your account
                         </h2>
                     </div>
                     <div className="mt-8">
@@ -120,16 +128,19 @@ const Login: React.FC = () => {
                                     <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-700">
                                         Password
                                     </label>
-                                    <div className="mt-1 rounded-md shadow-sm">
+                                    <div className="mt-1 rounded-md shadow-sm relative flex items-center">
                                         <input
                                             id="password"
                                             name="password"
-                                            type="password"
+                                            type={passwordVisible ? 'text' : 'password'}
                                             autoComplete="current-password"
                                             placeholder="············"
                                             required
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
+                                        <span className="absolute right-[12px] cursor-pointer text-main" onClick={togglePasswordVisibility}>
+                                            <FontAwesomeIcon icon={passwordVisible ? ["fas", "eye-slash"] : ["fas", "eye"]}/>
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="mt-6 flex items-center justify-between">

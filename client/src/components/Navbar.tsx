@@ -15,8 +15,10 @@ const Navbar: React.FC = () => {
   const handleDarkModeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       document.body.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
     } else {
       document.body.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
     }
   };
 

@@ -23,6 +23,9 @@ const MainRoutes: React.FC = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
   const isNotFoundPage = !['/login', '/tasks', '/'].includes(location.pathname);
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark');
+  }
 
   return (
     <div className={`w-full flex flex-col gap-[20px] dark:text-white ${!isLoginPage && !isNotFoundPage ? 'max-w-[1720px] p-[20px]' : ''}`}>

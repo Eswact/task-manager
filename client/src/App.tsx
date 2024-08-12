@@ -29,7 +29,7 @@ const MainRoutes: React.FC = () => {
   }
 
   return (
-    <div className={`w-full flex flex-col gap-[20px] dark:text-white ${!isLoginPage && !isNotFoundPage ? 'w-[calc(100%-80px)] py-[20px] px-[50px] ml-[80px] md:w-full md:ml-0 md:px-[20px]' : ''}`}>
+    <div className={`w-full border-box flex flex-col gap-[20px] dark:text-white`}>
       {
         (!isLoginPage && !isNotFoundPage) ? (
           <>
@@ -38,7 +38,7 @@ const MainRoutes: React.FC = () => {
           </>
         ) : null
       }
-      <main className={`${!isLoginPage && !isNotFoundPage ? 'mt-[80px]' : ''}`}>
+      <main className={`${!isLoginPage && !isNotFoundPage ? 'w-[calc(100%-80px)] py-[20px] px-[50px] mt-[80px] ml-[80px] md:w-full md:ml-0 md:px-[20px]' : ''}`}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<ProtectedRoute element={<Home />} />} />

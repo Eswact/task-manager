@@ -44,3 +44,13 @@ body.dark {
 .theme-controller:checked ~ .swap-off {
     display: none;
 }
+
+/* aside bar */
+#asideBar.show {
+    width: 248px;
+}
+@media screen and (max-width: 600px) {
+    #asideBar.show {
+        width: 100%;
+    }
+}

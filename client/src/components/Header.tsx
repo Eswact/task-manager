@@ -12,6 +12,10 @@ const Header: React.FC = () => {
     navigate('/login');
   };
 
+  const showNavbar = () => {
+    document.getElementById('asideBar')?.classList.add('show');
+  };
+
   const handleDarkModeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       document.body.classList.add('dark');
@@ -31,7 +35,7 @@ const Header: React.FC = () => {
     <header className="w-[calc(100%-80px)] md:w-full fixed top-0 left-[80px] md:left-0 h-[90px] bg-[#F5F5F5] dark:bg-dark justify-center items-center px-[50px] pt-[25px] md:px-[20px]">
       <nav className="w-full h-full px-[40px] md:px-[20px] py-[4px] flex items-center justify-between border-[1px] border-main bg-[#364F6B3e] rounded-md dark:border-[rgba(255,255,255,0.75)] ">
         <div className="flex items-center">
-          <button className="hidden md:block text-main hover:text-second dark:text-white dark:hover:text-second text-[1.5rem] px-[4px]"><FontAwesomeIcon icon={["fas", "bars"]}/></button>
+          <button onClick={showNavbar} className="hidden md:block text-main hover:text-second dark:text-white dark:hover:text-second text-[1.5rem] px-[4px]"><FontAwesomeIcon icon={["fas", "bars"]}/></button>
         </div>
         <div className="flex gap-[40px] md:gap-[20px] items-center justify-end">
           {/* darkmode toggle */}

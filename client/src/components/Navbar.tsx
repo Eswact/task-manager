@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Navbar: React.FC = () => {
   const location: Location = useLocation();
   return (
-    <aside className="fixed flex flex-col gap-[28px] overflow-hidden left-0 top-0 h-full py-[34px] w-[80px] md:w-0 hover:w-[248px] md:hover:w-0 transition-all bg-main shadow-[0_2px_3px_3px] shadow-main-shadow  md:shadow-none">
+    <aside id="asideBar" className="fixed flex flex-col gap-[28px] overflow-hidden left-0 top-0 h-full py-[34px] w-[80px] md:w-0 hover:w-[248px] md:hover:w-0 transition-all bg-main shadow-[0_2px_3px_3px] shadow-main-shadow  md:shadow-none">
       {/* logo */}
       <div className="flex items-center gap-[20px] p-[12px]">
         <img src="https://placehold.co/56x56/FC5185/white?text=T&font=Raleway" alt="logo" />

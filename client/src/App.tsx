@@ -7,6 +7,7 @@ import Tasks from "./pages/Tasks";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { isAuthenticated } from "./services/authService";
+import { closeNavbar } from "./scripts/common";
 
 const App: React.FC = () => {
   return (
@@ -46,6 +47,7 @@ const MainRoutes: React.FC = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <div onClick={closeNavbar} id="blackBg" className="z-10 hidden fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.5)]"></div>
     </div>
   );
 };

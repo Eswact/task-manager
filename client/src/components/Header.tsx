@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { Link, useLocation, Location, useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { showNavbar } from "../scripts/common";
 
 const Header: React.FC = () => {
   const location: Location = useLocation();
@@ -10,10 +11,6 @@ const Header: React.FC = () => {
   const exit = () => {
     logout();
     navigate('/login');
-  };
-
-  const showNavbar = () => {
-    document.getElementById('asideBar')?.classList.add('show');
   };
 
   const handleDarkModeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {

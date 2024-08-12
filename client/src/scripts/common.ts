@@ -19,4 +19,16 @@ function ShowSuccess(msg?: string) {
     });
 }
 
-export {ShowError, ShowSuccess};
+const showNavbar = () => {
+    document.getElementById('asideBar')?.classList.add('show');
+    document.getElementById('blackBg')?.classList.remove('hidden');
+    document.getElementById('blackBg')?.classList.add('block');
+};
+
+const closeNavbar = () => { 
+    document.getElementById('asideBar')?.classList.remove('show');
+    document.getElementById('blackBg')?.classList.remove('block');
+    document.getElementById('blackBg')?.classList.add('hidden');
+};
+
+export {ShowError, ShowSuccess, showNavbar, closeNavbar};

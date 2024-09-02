@@ -6,11 +6,11 @@ import { closeNavbar } from "../scripts/common";
 const Navbar: React.FC = () => {
   const location: Location = useLocation();
   return (
-    <aside id="asideBar" className="z-20 fixed flex flex-col gap-[28px] overflow-hidden left-0 top-0 h-full py-[34px] w-[80px] md:w-0 hover:w-[248px] md:hover:w-0 transition-all bg-main shadow-[0_2px_3px_3px] shadow-main-shadow  md:shadow-none">
+    <aside id="asideBar" className="z-20 fixed flex flex-col gap-[28px] overflow-hidden left-0 top-0 h-full py-[34px] w-[80px] md:w-0 hover:w-[248px] md:hover:w-0 transition-all bg-main shadow-[0_2px_3px_3px] shadow-main-shadow  md:shadow-none dark:bg-[#1C384C]">
       {/* logo */}
-      <div className="flex items-center gap-[20px] p-[12px]">
-        <img className="rounded-lg" src="https://placehold.co/56x56/FC5185/white?text=T&font=Raleway" alt="logo" />
-        <h1 className="text-[26px] font-bold block p-[6px] text-white">TaskMG</h1>
+      <div className="flex items-center gap-[12px] p-[12px]">
+        <img className="rounded-lg bg-white h-[56px] w-[56px]" src="/logo.png" alt="logo" />
+        <h1 className="text-[26px] font-bold block p-[6px] text-white">TaskNexus</h1>
       </div>
       {/* navigation links */}
       <ul className="flex flex-col items-start justify-start gap-[2px] py-[20px] font-semibold">

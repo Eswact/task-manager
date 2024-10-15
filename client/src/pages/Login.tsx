@@ -120,7 +120,7 @@ const Login: React.FC = () => {
                                         autoComplete="current-email"
                                         placeholder="example@mail.com"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ const Login: React.FC = () => {
                                             autoComplete="current-password"
                                             placeholder="············"
                                             required
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                            className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                         <span className="absolute right-[12px] cursor-pointer text-main" onClick={togglePasswordVisibility}>
                                             <FontAwesomeIcon icon={passwordVisible ? ["fas", "eye-slash"] : ["fas", "eye"]}/>
@@ -191,7 +191,7 @@ const Login: React.FC = () => {
                 <div className="loginTabs mx-auto w-full max-w-sm">
                     <div>
                         <h2 className="mt-6 text-3xl leading-9 font-extrabold text-main">
-                        Register to TaskMG
+                        Register to TaskNexus
                         </h2>
                     </div>
                     <div className="mt-8">
@@ -209,7 +209,7 @@ const Login: React.FC = () => {
                                         autoComplete="off"
                                         placeholder="example@mail.com"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@ const Login: React.FC = () => {
                                         autoComplete="off"
                                         placeholder="username"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>
@@ -241,7 +241,7 @@ const Login: React.FC = () => {
                                             autoComplete="new-password"
                                             placeholder="············"
                                             required
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                            className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@ const Login: React.FC = () => {
                                             autoComplete="new-password"
                                             placeholder="············"
                                             required
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                            className="appearance-none text-dark block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         />
                                     </div>
                                 </div>

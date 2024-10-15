@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -17,8 +17,23 @@ const App: React.FC = () => {
   );
 };
 
-const ProtectedRoute = ({ element }: { element: React.ReactElement }) => {
-  return isAuthenticated() ? element : <Navigate to="/login" />;
+const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const authenticated = await isAuthenticated();
+      setIsAuth(authenticated);
+    };
+
+    checkAuth();
+  }, []);
+
+  if (isAuth === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isAuth ? element : <Navigate to="/login" />;
 };
 
 const MainRoutes: React.FC = () => {

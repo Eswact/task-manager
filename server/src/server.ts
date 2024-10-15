@@ -2,9 +2,10 @@ import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import cookieSession from 'cookie-session';
 import dotenv from "dotenv";
-import db from "./models"; // TypeScript'e uygun import
-import routes from "./routes/index"; // TypeScript'e uygun import
+import db from "./models";
+import routes from "./routes/index";
 
 dotenv.config();
 
@@ -39,6 +40,18 @@ const PORT = process.env.PORT || 3037;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+const sessionSecret:string = process.env.SESSION_SECRET || "default"; 
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: [sessionSecret],
+    maxAge: 60 * 60 * 1000,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  })
+);
 
 // route
 app.get("/", (req: Request, res: Response) => {

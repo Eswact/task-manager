@@ -14,10 +14,11 @@ const fetchData = async (endpoint: string, onSuccess: Function, onError: Functio
 // BASIC POST
 const postData = async (endpoint: string, data: any, onSuccess: Function, onError: Function) => {
   try {
-    const response = await apiClient.post(endpoint, data);
+    const response = await apiClient.post(endpoint, data, { withCredentials: true });
     onSuccess(response.data);
   } catch (error) {
     onError(error);
   }
 };
+
 export { fetchData, postData };

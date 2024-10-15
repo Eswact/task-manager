@@ -1,16 +1,14 @@
 import React, {useEffect} from "react";
-import { Link, useLocation, Location, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { showNavbar } from "../scripts/common";
 
 const Header: React.FC = () => {
-  const location: Location = useLocation();
   const navigate = useNavigate();
 
   const exit = () => {
-    logout();
-    navigate('/login');
+    logout(navigate);
   };
 
   const handleDarkModeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {

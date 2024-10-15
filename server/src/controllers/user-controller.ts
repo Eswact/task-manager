@@ -5,6 +5,14 @@ import db from "../models";
 import { IUser } from "../models/user-model";
 import { sendVerificationMail } from "../services/mail-service";
 
+interface SessionData {
+  user?: string;
+}
+
+interface CustomRequest extends Request {
+  session: SessionData;
+}
+
 const User = db.users;
 
 const findAll = async (req: Request, res: Response): Promise<void> => {
@@ -37,11 +45,25 @@ const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET_KEY!, { expiresIn: "1h" });
+    
+    if (req.session) {
+      req.session.user = token;
+    } else {
+      res.status(500).json({ message: "Session not initialized." });
+      return;
+    }
+
     res.json({ token });
   } catch (err: any) {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 };
+
+const logout = async (req: Request, res: Response): Promise<void> => {
+  req.session = null;
+  res.clearCookie('session');
+  res.send('Logged out successfully');
+}
 
 const register = async (req: Request, res: Response): Promise<void> => {
   const { username, password, role, mail } = req.body;
@@ -91,9 +113,16 @@ const verifyEmail = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const verifyToken = async (req: Request, res: Response): Promise<void> => {
+  //auth middleware
+  res.json({ valid: true });
+}
+
 export = {
   findAll,
   login,
+  logout,
   register,
-  verifyEmail
+  verifyEmail,
+  verifyToken
 };

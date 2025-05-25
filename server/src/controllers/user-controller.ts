@@ -78,7 +78,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
     const newUser = new User({ username, password, role, mail, mailConfirmed });
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET!);
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY!);
     const verificationUrl = `${process.env.CONFIRM_URL}?verify=${token}`;
     await sendVerificationMail(newUser, verificationUrl);
 
@@ -97,7 +97,7 @@ const verifyEmail = async (req: Request, res: Response): Promise<void> => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY!) as { id: string };
     const user = await User.findById(decoded.id);
     if (!user) {
       res.status(400).json({ message: "User not found" });

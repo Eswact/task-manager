@@ -1,9 +1,11 @@
 import axios from 'axios';
 const apiClient = axios.create({
   baseURL: 'http://localhost:3037/api/',
+  withCredentials: true,
 });
 // BASIC GET
 const fetchData = async (endpoint: string, onSuccess: Function, onError: Function) => {
+  console.log(endpoint)
   try {
     const response = await apiClient.get(endpoint);
     onSuccess(response.data);

@@ -1,19 +1,13 @@
-import mongoose, { Schema, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-
-export interface IUser extends Document {
-  username: string;
-  password: string;
-  role: number;
-  mail: string;
-  mailConfirmed: boolean;
-}
+import IUser from "./interface";
+import { UserRole } from "../../enums/user-role";
 
 const UserSchema: Schema = new Schema(
   {
     username: { type: String, required: true },
     password: { type: String, required: true },
-    role: { type: Number, required: true },
+    role: { type: Number, enum: Object.values(UserRole), required: true },
     mail: { type: String, required: true },
     mailConfirmed: { type: Boolean, required: true, default: false },
   },
@@ -34,4 +28,4 @@ UserSchema.pre<IUser>("save", async function(next: Function) {
   }
 });
 
-export default mongoose.model<IUser>("User", UserSchema);
+export default model<IUser>("User", UserSchema);

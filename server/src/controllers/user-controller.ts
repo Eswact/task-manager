@@ -2,16 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../models";
-import { IUser } from "../models/user-model";
+import IUser from "../models/user/interface";
 import { sendVerificationMail } from "../services/mail-service";
-
-interface SessionData {
-  user?: string;
-}
-
-interface CustomRequest extends Request {
-  session: SessionData;
-}
 
 const User = db.users;
 

@@ -1,4 +1,4 @@
-import { IUser } from '../models/user-model';
+import IUser from '../models/user/interface';
 import fs from 'fs';
 import path from 'path';
 const nodemailer = require('nodemailer');

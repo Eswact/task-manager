@@ -33,7 +33,7 @@ const authMiddleware = async (req: CustomRequest, res: Response, next: NextFunct
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    // Kullanıcıyı request'e ekle
+    // add user to request
     (req as any).user = user;
     next();
   } catch (error) {

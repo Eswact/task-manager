@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// MongoDB bağlantısı
+// MongoDB connection
 db.mongoose
   .connect(db.url, {
     // useNewUrlParser: true,
